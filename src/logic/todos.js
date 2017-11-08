@@ -1,8 +1,10 @@
-export const ADD_ITEM = 'qgo/assessment/ADD_ITEM';
+import { removeItemFromItems } from '../lib/removeItemFromItems';
 
-export const addItem = content => {
-  return { type: ADD_ITEM, content };
-};
+export const ADD_ITEM = 'qgo/assessment/ADD_ITEM';
+export const REMOVE_ITEM = 'qgo/assessment/REMOVE_ITEM';
+
+export const addItem = content => ({ type: ADD_ITEM, content });
+export const removeItem = id => ({ type: REMOVE_ITEM, id });
 
 export const initialState = {
   items: [
@@ -26,6 +28,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         items: [...state.items, newItem],
       };
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        items: removeItemFromItems(state.items, action.id)
+      }
     default:
       return state;
   }

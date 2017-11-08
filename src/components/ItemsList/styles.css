@@ -5,3 +5,9 @@
 .itemsList-ul li {
   padding: 5px;
 }
+
+.removeItem {
+  cursor: pointer;
+  padding: 5px;
+  color: red;
+}
