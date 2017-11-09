@@ -5,10 +5,12 @@ const QGO_ASSESSMENT = 'qgo/assessment';
 export const ADD_ITEM = `${QGO_ASSESSMENT}/ADD_ITEM`;
 export const REMOVE_ITEM = `${QGO_ASSESSMENT}/REMOVE_ITEM`;
 export const TOGGLE_ITEM_COMPLETE_STATUS = `${QGO_ASSESSMENT}/TOGGLE_ITEM_COMPLETE_STATUS`;
+export const TOGGLE_HIDE_COMPLETED_ITEMS = `${QGO_ASSESSMENT}/TOGGLE_HIDE_COMPLETED_ITEMS`;
 
 export const addItem = content => ({ type: ADD_ITEM, content });
 export const removeItem = id => ({ type: REMOVE_ITEM, id });
 export const markItemAsComplete = id => ({ type: TOGGLE_ITEM_COMPLETE_STATUS, id });
+export const hideCompletedItems = hide => ({ type: TOGGLE_HIDE_COMPLETED_ITEMS, hide });
 
 export const initialState = {
   items: [
@@ -26,6 +28,7 @@ const reducer = (state = initialState, action) => {
       const newItem = {
         id: nextId,
         content: action.content,
+        complete: false,
       };
 
       return {
@@ -41,6 +44,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         items: toggleItemStatus(state.items, action.id)
+      }
+    case TOGGLE_HIDE_COMPLETED_ITEMS:
+      return {
+        ...state,
+        fullItems: state.items,
+        items: action.hide ? state.items.filter((item) => item.complete === false) : state.fullItems
       }
     default:
       return state;
