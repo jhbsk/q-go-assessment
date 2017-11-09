@@ -7,7 +7,7 @@ export const HideCompletedItems = ({ onHideCompletedItems }) => {
   return (
     <p className="hide-completed-items-wrapper">
       <span>Hide completed items&#63;</span>
-      <input onClick={ (evt) => onHideCompletedItems(evt.target.checked) } type="checkbox" />
+      <input className="hideCompletedCheckbox" onClick={ (evt) => onHideCompletedItems(evt.target.checked) } type="checkbox" />
     </p>
   )
 };
