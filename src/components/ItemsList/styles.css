@@ -11,3 +11,15 @@
   padding: 5px;
   color: red;
 }
+
+.markAsComplete {
+  cursor: pointer;
+}
+
+.markAsComplete.complete {
+  text-decoration: line-through;
+}
+
+.markAsComplete.incomplete {
+  text-decoration: none;
+}
